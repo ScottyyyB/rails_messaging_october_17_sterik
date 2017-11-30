@@ -101,6 +101,4 @@ Feature: Accessing the Sign Up page from the landing page
       Then I should see "1 error prohibited this user from being saved:"
       Then I should see "Name has already been taken"
 
-    Scenario: Visitor is already signed in and tries to sign in again [Sad Path]
-      Given I am on the "users/sign_up" page
-      Given I am signed in
+  
