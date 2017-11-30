@@ -1,19 +1,30 @@
-Given("I am on the landing page") do
-  visit root_path
-end
-
 When("I press the {string} button") do |sign_up|
   click_link_or_button sign_up
 end
 
-Then("I should be redirected to the {string} page") do |sign_up_page|
-  visit "#{sign_up_page}"
+Then("I should be redirected to the {string} page") do |page_name|
+  expect(page.current_path).to eq page_path_from(page_name)
 end
 
-Given("I am on the {string} page") do |sign_up_page|
-  visit "/#{sign_up_page}"
+Then("I should be on the {string} page") do |page_name|
+  visit page_path_from(page_name)
+end
+
+Given("I am on the {string} page") do |page_name|
+  visit page_path_from(page_name)
 end
 
 Then("I should see {string}") do |text|
   expect(page).to have_content text
+end
+
+def page_path_from(page_name)
+  case page_name.downcase
+  when 'sign up' then '/users/sign_up'
+  when 'landing' then root_path
+  when 'new conversation' then 'conversations/new'
+  else
+    raise "Sorry but we don't know this page. Add it to the page_path_from"\
+          ' in features/step_definitions/sign_up_steps.rb'
+  end
 end
