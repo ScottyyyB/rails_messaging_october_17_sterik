@@ -1,3 +1,17 @@
+Given("the following user exists") do |table|
+  table.hashes.each do |user|
+    User.create(user)
+  end
+end
+
+When("I fill in {string} with {string}") do |field, value|
+  fill_in field, with: value
+end
+
+When("I click button {string}") do |element|
+  click_button element
+end
+
 When("I press the {string} button") do |sign_up|
   click_link_or_button sign_up
 end
