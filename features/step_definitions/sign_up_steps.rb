@@ -13,7 +13,7 @@ When("I click button {string}") do |element|
 end
 
 When("I press the {string} button") do |sign_up|
-  click_link_or_button sign_up
+  click_link sign_up
 end
 
 Then("I should be redirected to the {string} page") do |page_name|
