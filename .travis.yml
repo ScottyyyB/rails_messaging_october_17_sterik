@@ -2,8 +2,23 @@ language: ruby
 cache: bundler
 rvm:
   - 2.4.0
+
+notifications:
+  email: false
+
+services:
+  - postgresql
+before_script:
+  - bundle exec rails db:create db:migrate RAILS_ENV=test
 script:
+  - bundle exec rails ci:tests
+
 deploy:
   provider: heroku
   api_key:
-    secure: rxV7wKzgoBYieMQWQgJWN9YkGK/1dHc5wJSmAgyS/shHj1618TjNgqXX+ibuKybI+BRrW2w+MDFMkzG6jgEld2jk4ca2+NvydhJbBRQLiBMfjKZbnhssnQJqvhFhwmeanTjA4r3DsTU0oPuRyKqQ2w163s/YpAddoiJbg5AGfjyMCnrY5dMwCCBjIyApcysuxtGFjuEGPHUssxc+B7qKcXIygvW8SDDRHfm0lkKUjvRa0U7JgjvNbfrKItUwmkopMi9Dk7tKkiN2prqKefrtoYpT2u6pAmd6n+jVYG7vRWMeWyed9SUmKbniEdOdGKQ1BUgE1sU1Dv4SNVxtaB8ynu8C2cMBHwf3QsSu8rA2lfwQ3AbnsvBJYu10kWhMI4RKed4BKSwOl18goQaX5RMpF12d2VcpioqA7cWWuMjubzT01AZdJ68kFzqY06SySvq6EVgngEBHBeGYnbSeHvqfPUqTjN/uRH+or36swsjRRnpaz/bgC/ENSuhL+Jq2otDFZvxFWnZrqBq10UAzEM9gPeRhUYzOlh6fO68WoHifZ+xe0c9Oog8i4MBti8sa3hY6qD+SS5WJnkH9USSoBfJ+oKpxgyBctjndkA2Rjgt3jSZwvNKR9RpU1UpIS8dalNusI6ySIPFFyNHlRIBo32YgL32SriJdSSpwF6DArZdNcYQ=
+    secure: pWVyl1DasgJ8OyFjz36BD9RhaEiuAjuxM6dSMy+yazg3rcr7LtQABEcmLZZ/p2mjdTFMfaZK4qFEDykTnHMs8oHZodWpdbPWpvljDBIFFpGT6Bxg9WF07LqKTuAOMERgBW/5PS1GjRJ3ZdgbSL5y1Ak8EFPl61B+Gjep67CPFjAVJmatQTHkcF9HwIyQM5dgRz3g+8c7ZmdPhDFEgl+V1hnbHjZpqHfzx0sKfsKs9VnDVhVC0IXYbHgjqGKvYwKWA0Pp8czy65szr+KQ8OUYPEAarSGobBBN3j8m+mMti0d41PhWDT/kzgKc3Zf2uRURlGm5OF/u1+HvpAANp4ZsNP22jYy8VvkWneE29t2UaSaTk4uL1la5kSGTnHzAVDiBfX5HWulaQurBRu9R3qhzFyimqT7tVQMCYYUHXKrIE1ZGCV8B8KwWq7AifUZljB6CCseQ7czJcTW3r7kQczUBQCQtR4kvRM/cXcOlHcpiy3Xwp+IgbLta/Eju+sMeZgaKmuDtpxmbhdd47jjrKzqmnGLTpcjm8gu4QyO/a/rS2FzF73jBQ6uASqNdJVU1RiM1cH4KmuzzZs1ZbsAZISCXePSx1DgDzwfAQ0qrK7NhSIDhCK8JOibId++9AyARQUHQFqtOGayJAap2oE0PH+wtABb/uc1E5GGlUvqnutwZZHM=
+
+  app:
+    master: rails-messaging-sterik
+  run:
+    - bundle exec rails db:migrate
