@@ -16,11 +16,11 @@ When("I press the {string} button") do |sign_up|
   click_link sign_up
 end
 
-Then("I should be redirected to the {string} page") do |page_name|
+Then("I should be (redirected to)/on the {string} page") do |page_name|
   expect(page.current_path).to eq page_path_from(page_name)
 end
 
-Given("I (should be)/am on the {string} page") do |page_name|
+Given("I visit the {string} page") do |page_name|
   visit page_path_from(page_name)
 end
 
