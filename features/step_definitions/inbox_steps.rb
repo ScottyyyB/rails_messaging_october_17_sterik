@@ -4,9 +4,9 @@ Given("the following user exists") do |table|
   end
 end
 
-Given("I am signed in as {string}") do |user|
-   user = User.find_by(name: user)
-   login_as(user, scope: :user)
+Given("I am signed in as {string}") do |name|
+   @user = User.find_by(name: name)
+   login_as(@user, scope: :user)
 end
 
 When("I visit the {string} page") do |page_name|
@@ -17,10 +17,15 @@ Then("I should see the {string} button") do |link|
   expect(page).to have_link link
 end
 
-# Then("I should have {string} messages") do |expected_count|
-#
-# end
+Given("I send a mail to {string}") do |name|
+  @receiver = User.find_by(name: name)
+  @user.send_message(@receiver, 'Hey there', 'Subject')
+end
 
+Then("I should have {string} message") do |expected_count|
+  count = @receiver.mailbox.inbox.count
+  expect(count).to eq expected_count.to_i
+end
 
 def page_path_from(page_name)
   case page_name.downcase
