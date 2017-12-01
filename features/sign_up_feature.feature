@@ -70,6 +70,7 @@ Feature: Accessing the Sign Up page from the landing page
       Then I should see "1 error prohibited this user from being saved:"
       And I should see "Password is too short (minimum is 8 characters)"
 
+
     Scenario: Visitor fills in all fields with Name more than 10 characters [Sad Path]
       Given I visit the "Sign up" page
       When I fill in "Name" with "Oliverrrrrrrr"
@@ -79,7 +80,6 @@ Feature: Accessing the Sign Up page from the landing page
       And I click button "Create"
       Then I should see "1 error prohibited this user from being saved:"
       And I should see "Name is too long (maximum is 10 characters)"
-
 
     Scenario: Visitor fills in all fields, Password and Password confirmation less than 8 characters [Sad Path]
       Given I visit the "Sign up" page
